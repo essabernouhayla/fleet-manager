@@ -1,0 +1,14 @@
+{
+  "users": [
+    { "id": 1, "name": "Sara Alami", "email": "sara@fleet.ma", "role": "COLLAB" },
+    { "id": 2, "name": "Omar Benali", "email": "omar@fleet.ma", "role": "MANAGER" }
+  ],
+  "vehicles": [
+    { "id": 1, "model": "Dacia Duster", "immatriculation": "12345-A-1", "status": "AVAILABLE", "lastServiceDate": "2025-01-10" },
+    { "id": 2, "model": "Renault Clio", "immatriculation": "67890-B-6", "status": "IN_SERVICE", "lastServiceDate": "2026-08-01" },
+    { "id": 3, "model": "Peugeot 208", "immatriculation": "11111-C-3", "status": "MAINTENANCE", "lastServiceDate": "2026-05-20" }
+  ],
+  "maintenance_requests": [
+    { "id": 1, "vehicleId": 3, "description": "Problème de freins", "urgency": "HIGH", "status": "PENDING" }
+  ]
+}
