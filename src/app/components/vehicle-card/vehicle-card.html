@@ -1,1 +1,16 @@
-<p>vehicle-card works!</p>
+<div class="card">
+  <h3>{{ vehicle.model }} — {{ vehicle.immatriculation }}</h3>
+  <p>Statut : {{ vehicle.status }}</p>
+  @if (isUrgent) { <span class="badge-red">Entretien Urgent</span> }
+  <button (click)="showForm = !showForm">Signaler une panne</button>
+
+  @if (showForm) {
+    <form [formGroup]="form" (ngSubmit)="submit()">
+      <textarea formControlName="description"></textarea>
+      <select formControlName="urgency">
+        <option value="LOW">LOW</option><option value="HIGH">HIGH</option>
+      </select>
+      <button type="submit">Envoyer</button>
+    </form>
+  }
+</div>

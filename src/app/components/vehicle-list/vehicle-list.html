@@ -1,1 +1,5 @@
-<p>vehicle-list works!</p>
+<input placeholder="Rechercher..." (input)="search.set($any($event.target).value)">
+<app-vehicle-stats [stats]="stats()" />
+@for (v of filtered(); track v.id) {
+  <app-vehicle-card [vehicle]="v" (reported)="load()" />
+}

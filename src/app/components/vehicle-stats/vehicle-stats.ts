@@ -1,9 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+export interface Stats {
+  totalVehicles: number;
+  totalRequests: number;
+  available: number;
+  inService: number;
+  maintenance: number;
+}
 
 @Component({
   selector: 'app-vehicle-stats',
   imports: [],
   templateUrl: './vehicle-stats.html',
-  styleUrl: './vehicle-stats.css',
+  styleUrl: './vehicle-stats.css'
 })
-export class VehicleStats {}
+export class VehicleStatsComponent {
+  @Input({ required: true }) stats!: Stats;
+}

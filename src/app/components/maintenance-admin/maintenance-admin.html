@@ -1,1 +1,7 @@
-<p>maintenance-admin works!</p>
+@for (r of pending(); track r.id) {
+  <div>
+    Véhicule #{{ r.vehicleId }} — {{ r.description }} ({{ r.urgency }})
+    <button (click)="decide(r, 'APPROVED')">Approuver</button>
+    <button (click)="decide(r, 'REJECTED')">Rejeter</button>
+  </div>
+}
