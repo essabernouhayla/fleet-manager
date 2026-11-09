@@ -14,7 +14,10 @@ export class VehicleCardComponent {
   @Output() reported = new EventEmitter<void>();
 
   private fleet = inject(FleetService);
+
   showForm = false;
+  sending = false;
+  error = '';
 
   form = new FormGroup({
     description: new FormControl('', Validators.required),
@@ -27,17 +30,38 @@ export class VehicleCardComponent {
     return new Date(this.vehicle.lastServiceDate) < limit;
   }
 
+  toggle() {
+    this.showForm = !this.showForm;
+    this.error = '';
+  }
+
+  cancel() {
+    this.showForm = false;
+    this.error = '';
+    this.form.reset({ description: '', urgency: 'LOW' });
+  }
+
   submit() {
-    if (this.form.invalid) return;
+    if (this.form.invalid || this.sending) return;
+
+    this.sending = true;
+    this.error = '';
+
     this.fleet.reportBreakdown({
       vehicleId: this.vehicle.id,
       description: this.form.value.description!,
       urgency: this.form.value.urgency!,
       status: 'PENDING',
-    }).subscribe(() => {
-      this.showForm = false;
-      this.form.reset({ urgency: 'LOW' });
-      this.reported.emit();
+    }).subscribe({
+      next: () => {
+        this.sending = false;
+        this.cancel();
+        this.reported.emit();
+      },
+      error: () => {
+        this.sending = false;
+        this.error = "Échec de l'envoi. Vérifiez que json-server est lancé.";
+      }
     });
   }
 }

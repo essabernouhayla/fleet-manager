@@ -1,7 +1,53 @@
-@for (r of pending(); track r.id) {
-  <div>
-    Véhicule #{{ r.vehicleId }} — {{ r.description }} ({{ r.urgency }})
-    <button (click)="decide(r, 'APPROVED')">Approuver</button>
-    <button (click)="decide(r, 'REJECTED')">Rejeter</button>
-  </div>
+<div class="header">
+  <h2>Demandes en attente</h2>
+  <span class="count">{{ pending().length }}</span>
+</div>
+<p class="muted intro">
+  Approuver une demande remet le véhicule en service. Rejeter ne modifie que la demande.
+</p>
+
+@if (error()) {
+  <p class="error">{{ error() }}</p>
+}
+
+@if (loading()) {
+  <p class="muted">Chargement…</p>
+} @else {
+  @for (r of pending(); track r.id) {
+    @let v = vehicleOf(r.vehicleId);
+
+    <div class="card request" [class.high]="r.urgency === 'HIGH'" [class.low]="r.urgency === 'LOW'">
+      <div class="info">
+        <div class="title">
+          <strong>{{ v?.model ?? 'Véhicule #' + r.vehicleId }}</strong>
+          @if (v) {
+            <span class="plate">{{ v.immatriculation }}</span>
+          }
+          <span class="urgency" [class.high]="r.urgency === 'HIGH'">
+            {{ r.urgency === 'HIGH' ? 'Urgence haute' : 'Urgence faible' }}
+          </span>
+        </div>
+
+        <p class="desc">{{ r.description }}</p>
+
+        @if (v) {
+          <p class="muted">Statut actuel du véhicule : {{ v.status }}</p>
+        }
+      </div>
+
+      <div class="actions">
+        <button class="btn btn-green" [disabled]="busyId() !== null" (click)="decide(r, 'APPROVED')">
+          {{ busyId() === r.id ? 'Traitement…' : 'Approuver' }}
+        </button>
+        <button class="btn btn-red" [disabled]="busyId() !== null" (click)="decide(r, 'REJECTED')">
+          Rejeter
+        </button>
+      </div>
+    </div>
+  } @empty {
+    <div class="card empty">
+      <h3>Aucune demande en attente</h3>
+      <p class="muted">Toutes les demandes ont été traitées.</p>
+    </div>
+  }
 }
