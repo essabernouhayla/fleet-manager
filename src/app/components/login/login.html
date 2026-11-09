@@ -1,3 +1,15 @@
-@for (u of users$ | async; track u.id) {
-  <button (click)="choose(u)">Se connecter comme {{ u.name }} ({{ u.role }})</button>
-}
+<div class="login">
+  <h2>Choisissez un profil</h2>
+
+  @if (users$ | async; as users) {
+    @for (u of users; track u.id) {
+      <button (click)="choose(u)">
+        Se connecter comme {{ u.name }} ({{ u.role }})
+      </button>
+    } @empty {
+      <p>Aucun utilisateur trouvé dans db.json.</p>
+    }
+  } @else {
+    <p>Chargement…</p>
+  }
+</div>

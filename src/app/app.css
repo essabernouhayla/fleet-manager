@@ -1,11 +1,35 @@
-nav {
+.topbar {
   display: flex;
   align-items: center;
-  gap: 16px;
-  padding: 12px 20px;
-  background: #1f2937;
-  color: white;
+  justify-content: space-between;
+  height: 66px;
+  padding: 0 24px;
+  background: #000;
+  border-bottom: 3px solid var(--gold);
 }
-nav a { color: #93c5fd; text-decoration: none; }
-nav a:hover { text-decoration: underline; }
-nav button { margin-left: auto; cursor: pointer; }
+
+.brand { display: flex; align-items: center; gap: 12px; color: #fff; font-size: 22px; text-decoration: none; }
+.brand b { color: var(--gold); }
+
+.logo {
+  width: 48px;
+  height: 48px;
+  object-fit: contain;
+}
+
+nav { display: flex; align-items: center; gap: 22px; }
+nav a { color: #C7CCC7; text-decoration: none; padding: 4px 0; border-bottom: 2px solid transparent; }
+nav a:hover { color: #fff; }
+nav a.active { color: #fff; border-bottom-color: var(--gold); }
+
+.user { color: #fff; font-size: 14px; }
+.role {
+  margin-left: 6px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background: var(--gold);
+  color: #fff;
+  font-style: normal;
+  font-size: 11px;
+  font-weight: 700;
+}

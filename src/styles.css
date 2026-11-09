@@ -1,1 +1,61 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --gold: #22A32A;
+  --gold-dark: #1B8521;
+  --navy: #111111;
+  --navy-dark: #000000;
+  --gray: #6B7280;
+  --bg: #F4F6F4;
+  --border: #E1E5E1;
+  --text: #1F2937;
+  --green: #22A32A;
+  --red: #DC2626;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+
+h2 { color: var(--navy); margin: 0 0 16px; }
+.muted { color: var(--gray); font-size: 14px; margin: 4px 0; }
+.container { max-width: 1000px; margin: 28px auto; padding: 0 16px; }
+
+.card {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, .06);
+}
+
+.input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  font: inherit;
+  background: #fff;
+}
+.input:focus { outline: 2px solid var(--gold); border-color: var(--gold); }
+
+.btn {
+  padding: 9px 16px;
+  border: none;
+  border-radius: 8px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn:disabled { opacity: .5; cursor: not-allowed; }
+.btn-gold { background: var(--gold); color: #fff; }
+.btn-gold:hover:not(:disabled) { background: var(--gold-dark); }
+.btn-navy { background: var(--navy); color: #fff; }
+.btn-navy:hover:not(:disabled) { background: var(--navy-dark); }
+.btn-green { background: var(--green); color: #fff; }
+.btn-red { background: var(--red); color: #fff; }

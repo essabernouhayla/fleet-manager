@@ -1,14 +1,23 @@
-<nav>
-  @if (auth.user(); as u) {
-    <span>{{ u.name }} — {{ u.role }}</span>
-    <a routerLink="/vehicles">Véhicules</a>
-    @if (u.role === 'MANAGER') {
-      <a routerLink="/admin/maintenance">Administration</a>
-    }
-    <button (click)="logout()">Déconnexion</button>
-  } @else {
-    <a routerLink="/login">Connexion</a>
-  }
-</nav>
+<header class="topbar">
+  <a class="brand" routerLink="/vehicles">
+    <img src="logo.svg" alt="Logo FleetManager" class="logo">
+    <span>Fleet<b>Manager</b></span>
+  </a>
 
-<router-outlet />
+  <nav>
+    @if (auth.user(); as u) {
+      <a routerLink="/vehicles" routerLinkActive="active">Véhicules</a>
+      @if (u.role === 'MANAGER') {
+        <a routerLink="/admin/maintenance" routerLinkActive="active">Administration</a>
+      }
+      <span class="user">{{ u.name }} <em class="role">{{ u.role }}</em></span>
+      <button class="btn btn-gold" (click)="logout()">Déconnexion</button>
+    } @else {
+      <a routerLink="/login" routerLinkActive="active">Connexion</a>
+    }
+  </nav>
+</header>
+
+<main class="container">
+  <router-outlet />
+</main>
