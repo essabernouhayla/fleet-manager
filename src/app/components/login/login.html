@@ -1,1 +1,3 @@
-<p>login works!</p>
+@for (u of users$ | async; track u.id) {
+  <button (click)="choose(u)">Se connecter comme {{ u.name }} ({{ u.role }})</button>
+}

@@ -6,4 +6,11 @@ import { Component } from '@angular/core';
   templateUrl: './login.html',
   styleUrl: './login.css',
 })
-export class Login {}
+export class LoginComponent {
+  private fleet = inject(FleetService);
+  private auth = inject(AuthService);
+  private router = inject(Router);
+  users$ = this.fleet.getUsers();
+
+  choose(u: User) { this.auth.login(u); this.router.navigate(['/vehicles']); }
+}
